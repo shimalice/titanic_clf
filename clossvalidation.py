@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import preprocessingTitanic as pt
+import classifierSVC as csvc
 import classifierRandomForest as crf
 from sklearn.model_selection import KFold
 from sklearn.metrics import make_scorer, accuracy_score
@@ -12,7 +13,8 @@ data_train, data_test = pt.preprocessingTitanic(data_train, data_test)
 X_all = data_train.drop(['Survived', 'PassengerId'], axis=1)
 y_all = data_train['Survived']
 
-clf = crf.classifyRandomForest(X_all, y_all)
+clf = csvc.classifySVC(X_all, y_all)
+# clf = crf.classifyRandomForest(X_all, y_all)
 
 def run_kfold(clf):
     kf = KFold(n_splits=10)
